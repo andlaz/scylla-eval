@@ -1,0 +1,40 @@
+keyspace: nexrad_benchmark
+keyspace_definition:
+  "CREATE KEYSPACE
+    nexrad_benchmark
+    WITH replication = 
+      { 'class': 'SimpleStrategy', 'replication_factor': 3};"
+table: nexrad_drdgf_data_moment_blocks
+table_definition:
+  "CREATE TABLE nexrad_drdgf_data_moment_blocks (
+    station text,
+    measured_at timestamp,
+    azimuth_number int,
+    azimuth_angle float,
+    azimuth_resolution int,
+    elevation_number int,
+    elevation_angle float,
+    data_name text,
+    data_value blob,
+    PRIMARY KEY (station, measured_at)
+  );"
+queries:
+  read1:
+    cql: "select * from nexrad_drdgf_data_moment_blocks where station = ? and measured_at > ? and measured_at <= ?"
+    fields: samerow # samerow or multirow (select arguments from the same row, or randomly from all rows in the partition)
+columnspec:
+  - name: station
+    size: fixed(4)
+  - name: azimuth_number
+    size: fixed(3)
+  - name: azimuth_angle
+    size: fixed(3)
+  - name: measured_at
+    size: fixed(10)
+  - name: data_name
+    size: fixed(3)
+  - name: data_value
+    size: exp(200..1024)
+insert:
+  partitions: fixed(1)
+  batchtype: UNLOGGED

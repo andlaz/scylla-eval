@@ -1,0 +1,10 @@
+FROM ubuntu:14.04
+MAINTAINER andras.szerdahelyi@gmail.com
+
+RUN sudo wget -O /etc/apt/sources.list.d/scylla.list http://downloads.scylladb.com/deb/ubuntu/scylla-1.3-trusty.list && \
+	add-apt-repository ppa:webupd8team/java && \
+	sudo apt-get update && \
+	sudo apt-get install -y scylladb-tools oracle-java8-installer gnuplot && \
+	wget http://archive.apache.org/dist/cassandra/3.0.6/apache-cassandra-3.0.6-bin.tar.gz && \
+	tar xfv apache-cassandra-3.0.6-bin.tar.gz && \
+	git clone https://github.com/andlaz/scylla-benchmark.git /
