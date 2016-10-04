@@ -15,6 +15,6 @@ We will be benchmarking a classic time-series schema with a typical OLTP query.
 - run the below ```cassandra-stress``` command in the container
 
 
-    cassandra-stress user profile=/scylla-eval/timeseries.yaml n=100000 ops\(insert=9,read1=1\) no-warmup cl=ONE -node 10.42.60.4 -rate threads=16 | ./plot.sh scylla insert read1
+    ```cassandra-stress user profile=/scylla-eval/timeseries.yaml n=100000 ops\(insert=9,read1=1\) no-warmup cl=ONE -node 10.42.60.4 -rate threads=16 | ./plot.sh scylla insert read1```
     
 The parameters to plot.sh are (1) a name to construct the graph with, and the names of the queries from the yaml file to plot.
