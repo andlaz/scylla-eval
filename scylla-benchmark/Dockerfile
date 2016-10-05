@@ -12,5 +12,5 @@ RUN sudo apt-get update && \
   	sudo debconf-set-selections && \
 	sudo apt-get install -y --force-yes scylla-tools oracle-java8-installer gnuplot git && \
 	wget http://archive.apache.org/dist/cassandra/3.0.6/apache-cassandra-3.0.6-bin.tar.gz && \
-	tar xfv apache-cassandra-3.0.6-bin.tar.gz && \
+	tar xfv apache-cassandra-3.0.6-bin.tar.gz --directory / && \
 	git clone https://github.com/andlaz/scylla-eval.git /scylla-eval
